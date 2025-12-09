@@ -37,4 +37,29 @@ abstract class AppTextStyles {
     fontWeight: FontWeight.w400,
     color: AppColors.errorColor,
   );
+  static const font18BlackWeight400 = TextStyle(
+    fontSize: 18,
+    fontWeight: FontWeight.w400,
+    color: AppColors.blackColor,
+  );
+  static const font16BlackWeight400 = TextStyle(
+    fontSize: 16,
+    fontWeight: FontWeight.w400,
+    color: AppColors.blackColor,
+  );
+  static const font24BlackWeight400 = TextStyle(
+    fontSize: 24,
+    fontWeight: FontWeight.w400,
+    color: AppColors.whiteColor,
+  );
+  static const font48WhiteWeight900 = TextStyle(
+    fontSize: 48,
+    fontWeight: FontWeight.w900,
+    color: AppColors.whiteColor,
+  );
+  static const font11BlackWeight400 = TextStyle(
+    fontSize: 11,
+    fontWeight: FontWeight.w400,
+    color: AppColors.blackColor,
+  );
 }

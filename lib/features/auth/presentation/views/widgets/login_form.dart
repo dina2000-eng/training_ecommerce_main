@@ -26,14 +26,13 @@ class _LoginFormState extends State<LoginForm> {
   }
 
   void _submit() {
-    if (_formKey.currentState!.validate()) {
-      // كل شيء صحيح → هنا تقدر تحطي كود تسجيل الدخول أو استدعاء API
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('تم تسجيل الدخول بنجاح')),
-      );
-    } else {
-      // لو في خطأ، Form يعرض رسائل الخطأ تحت الحقول تلقائيًا
-    }
+    Navigator.of(context).pushReplacementNamed(Routes.HomeScreen);
+    // if (_formKey.currentState!.validate()) {
+    //   ScaffoldMessenger.of(context).showSnackBar(
+    //     const SnackBar(content: Text('تم تسجيل الدخول بنجاح')),
+    //   );
+    // } else {
+    // }
   }
 
   @override
