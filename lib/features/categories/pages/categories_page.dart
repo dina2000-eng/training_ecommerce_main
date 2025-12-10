@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_text_styles.dart';
-import '../../home/widget/BottomNavBar.dart';
 
 class CategoriesPage extends StatefulWidget {
   @override
@@ -35,9 +34,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
             ),
           ),
 
-          SizedBox(height: 16),
-
-          // Summer Sales Box
+          16.verticalSizedBox,
           Container(
             padding: 16.vPadding,
             width: 343,
@@ -55,7 +52,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
               ],
             ),
           ).center(),
-          SizedBox(height: 16),
+          16.verticalSizedBox,
           Column(
             children: [
               Container(
@@ -91,7 +88,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
                   ],
                 ),
                 ),
-              SizedBox(height: 16,),
+              16.verticalSizedBox,
               Container(
                 width: 343,
                 height: 100,
@@ -125,7 +122,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
                   ],
                 ),
               ),
-              SizedBox(height: 16,),
+              16.verticalSizedBox,
               Container(
                 width: 343,
                 height: 100,
@@ -159,7 +156,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
                   ],
                 ),
               ),
-              SizedBox(height: 16,),
+              16.verticalSizedBox,
               Container(
                 width: 343,
                 height: 100,
