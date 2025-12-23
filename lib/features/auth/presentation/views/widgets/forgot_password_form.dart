@@ -35,9 +35,8 @@ class _ForgotPasswordFormState extends State<ForgotPasswordForm> {
             keyboardType: TextInputType.emailAddress,
             textInputAction: TextInputAction.done,
             validator: (value) {
-              if (value == null || value.isEmpty) return "Email مطلوب";
-              if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
-                  .hasMatch(value)) return "Email غير صالح";
+              if (value == null || value.isEmpty) return null;
+              if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value)) return "invalid";
               return null;
             },
           ),

@@ -21,7 +21,6 @@ class _SignUpFormState extends State<SignUpForm> {
 
   void _submit() {
     if (_formKey.currentState!.validate()) {
-      // إذا كل شيء صحيح
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('تم التسجيل بنجاح')),
       );
@@ -32,6 +31,7 @@ class _SignUpFormState extends State<SignUpForm> {
   Widget build(BuildContext context) {
     return Form(
       key: _formKey,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -41,7 +41,8 @@ class _SignUpFormState extends State<SignUpForm> {
             keyboardType: TextInputType.name,
             textInputAction: TextInputAction.next,
             validator: (value) {
-              if (value == null || value.isEmpty) return "Name مطلوب";
+              if (value == null || value.isEmpty) return null;
+              if (value.length < 3) return "invalid";
               return null;
             },
           ),
@@ -52,9 +53,8 @@ class _SignUpFormState extends State<SignUpForm> {
             keyboardType: TextInputType.emailAddress,
             textInputAction: TextInputAction.next,
             validator: (value) {
-              if (value == null || value.isEmpty) return "Email مطلوب";
-              if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
-                  .hasMatch(value)) return "Email غير صالح";
+              if (value == null || value.isEmpty) return null;
+              if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value)) return "invalid";
               return null;
             },
           ),
@@ -67,8 +67,7 @@ class _SignUpFormState extends State<SignUpForm> {
             obscureText: true,
             validator: (value) {
               if (value == null || value.isEmpty) return "Password مطلوب";
-              if (value.length < 6)
-                return "Password يجب أن تكون 6 أحرف على الأقل";
+              if (value.length < 6) return "invalid";
               return null;
             },
           ),

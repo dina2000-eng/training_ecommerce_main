@@ -26,7 +26,7 @@ class _LoginFormState extends State<LoginForm> {
   }
 
   void _submit() {
-    Navigator.of(context).pushReplacementNamed(Routes.HomeScreen);
+    Navigator.of(context).pushReplacementNamed(Routes.homeScreen);
     // if (_formKey.currentState!.validate()) {
     //   ScaffoldMessenger.of(context).showSnackBar(
     //     const SnackBar(content: Text('تم تسجيل الدخول بنجاح')),
@@ -48,13 +48,8 @@ class _LoginFormState extends State<LoginForm> {
             keyboardType: TextInputType.emailAddress,
             textInputAction: TextInputAction.next,
             validator: (value) {
-              if (value == null || value.isEmpty) {
-                return "Email مطلوب";
-              }
-              if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
-                  .hasMatch(value)) {
-                return "Email غير صالح";
-              }
+              if (value == null || value.isEmpty) return null;
+              if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value)) return "invalid";
               return null;
             },
           ),
@@ -66,12 +61,8 @@ class _LoginFormState extends State<LoginForm> {
             textInputAction: TextInputAction.done,
             obscureText: true,
             validator: (value) {
-              if (value == null || value.isEmpty) {
-                return "Password مطلوب";
-              }
-              if (value.length < 6) {
-                return "Password يجب أن تكون 6 أحرف على الأقل";
-              }
+              if (value == null || value.isEmpty) return "Password مطلوب";
+              if (value.length < 6) return "invalid";
               return null;
             },
           ),
