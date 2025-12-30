@@ -4,9 +4,16 @@ import 'package:ecommerce/core/theme/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
 class MainButton extends StatelessWidget {
-  const MainButton({super.key, this.onTap, required this.title});
+  const MainButton({
+    super.key,
+    this.onTap,
+    this.title,
+    this.child,
+  });
+
   final void Function()? onTap;
-  final String title;
+  final String? title;
+  final Widget? child;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +34,7 @@ class MainButton extends StatelessWidget {
             ),
           ],
         ),
-        child: Text(title, style: AppTextStyles.font14WhiteWeight500).center(),
+        child: (child ?? Text(title ?? '', style: AppTextStyles.font14WhiteWeight500)).center(),
       ),
     );
   }

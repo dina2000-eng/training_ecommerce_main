@@ -5,21 +5,21 @@ import '../../../core/theme/app_text_styles.dart';
 import 'RatingStars.dart';
 
 class SaleProductItem extends StatefulWidget {
-  final String image;
-  final String brand;
+  final String imgUrl;
   final String title;
-  final int oldPrice;
-  final int newPrice;
-  final int discount;
+  final int price;
+  final int? discountValue;
+  final String category;
+  final int? rate;
 
   const SaleProductItem({
     super.key,
-    required this.image,
-    required this.brand,
+    required this.imgUrl,
     required this.title,
-    required this.oldPrice,
-    required this.newPrice,
-    required this.discount,
+    required this.price,
+    required this.discountValue,
+    required this.category,
+    required this.rate,
   });
 
   @override
@@ -43,7 +43,7 @@ class _SaleProductItemState extends State<SaleProductItem> {
               ClipRRect(
                 borderRadius: BorderRadius.circular(10),
                 child: Image.asset(
-                  widget.image,
+                  widget.imgUrl,
                   width: 160,
                   height: 200,
                   fit: BoxFit.cover,
@@ -60,7 +60,7 @@ class _SaleProductItemState extends State<SaleProductItem> {
                     borderRadius: 20.allBorderRadius,
                   ),
                   child: Text(
-                    "-${widget.discount}%",
+                    "-${widget.discountValue}%",
                     style: AppTextStyles.font11WhiteWeight400,
                   ),
                 ),
@@ -119,20 +119,15 @@ class _SaleProductItemState extends State<SaleProductItem> {
             ],
           ),
           4.verticalSizedBox,
-          Text(widget.brand, style: AppTextStyles.font11GrayWeight400),
           Text(widget.title, style: AppTextStyles.font16BlackWeight400),
           3.verticalSizedBox,
           Row(
             children: [
               Text(
-                "${widget.oldPrice}\$",
+                "${widget.price}\$",
                 style: AppTextStyles.font14GrayWeight500,
               ),
               const SizedBox(width: 6),
-              Text(
-                "${widget.newPrice}\$",
-                style: AppTextStyles.font14RedWeight500,
-              ),
             ],
           ),
         ],

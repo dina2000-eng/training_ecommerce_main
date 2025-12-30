@@ -1,7 +1,7 @@
 import 'package:ecommerce/core/components/widgets/main_button.dart';
 import 'package:ecommerce/core/extensions/app_extentions.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
 import '../../../../../core/components/widgets/app_text_field.dart';
 import '../../../../../core/routes/routes.dart';
 import 'navigate_text_widget.dart';
@@ -25,15 +25,30 @@ class _LoginFormState extends State<LoginForm> {
     super.dispose();
   }
 
-  void _submit() {
-    Navigator.of(context).pushReplacementNamed(Routes.homeScreen);
-    // if (_formKey.currentState!.validate()) {
-    //   ScaffoldMessenger.of(context).showSnackBar(
-    //     const SnackBar(content: Text('تم تسجيل الدخول بنجاح')),
-    //   );
-    // } else {
-    // }
+  void _submit() async {
+    if (_formKey.currentState!.validate()) {
+      try {
+        UserCredential userCredential = await FirebaseAuth.instance
+            .signInWithEmailAndPassword(
+          email: _emailController.text.trim(),
+          password: _passwordController.text.trim(),
+        );
+        Navigator.of(context).pushReplacementNamed(Routes.homeScreen);
+      } on FirebaseAuthException catch (e) {
+        String message = '';
+        if (e.code == 'user-not-found') {
+          message = 'المستخدم غير موجود';
+        } else if (e.code == 'wrong-password') {
+          message = 'كلمة المرور غير صحيحة';
+        } else {
+          message = 'حدث خطأ، حاول مرة أخرى';
+        }
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text(message)));
+      }
+    }
   }
+
 
   @override
   Widget build(BuildContext context) {

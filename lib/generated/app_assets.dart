@@ -41,5 +41,7 @@ class AppAssets {
   /// Assets for imagesClothe2
   /// assets/images/clothe2.png
   static const String imagesClothe2 = "assets/images/clothe2.png";
+
+
 }
 
