@@ -108,7 +108,7 @@ class HomePage extends StatelessWidget {
                                     MaterialPageRoute(
                                       builder: (_) => BlocProvider(
                                         create: (_) => ProductDetailsCubit(),
-                                        child: ProductDetails(product: product),
+                                        child: ProductDetails(product: product,),
                                       ),
                                     ),
                                   );
@@ -154,7 +154,7 @@ class HomePage extends StatelessWidget {
                                     MaterialPageRoute(
                                       builder: (_) => BlocProvider(
                                         create: (_) => ProductDetailsCubit(),
-                                        child: ProductDetails(product: product),
+                                        child: ProductDetails(product: product,),
                                       ),
                                     ),
                                   );

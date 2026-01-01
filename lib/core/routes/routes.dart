@@ -5,5 +5,6 @@ abstract class Routes {
   static const String forgotPassword = '/forgetPassword';
   static const categories = '/categories';
   static const homeScreen = '/homescreen';
+  static const String productDetails = '/product-details';
 
 }
