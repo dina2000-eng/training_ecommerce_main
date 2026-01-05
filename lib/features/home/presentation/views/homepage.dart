@@ -7,41 +7,9 @@ import '../../../../controllers/home/home_state.dart';
 import '../../../../controllers/product_details/product_details_cubit.dart';
 import '../../../../core/theme/app_text_styles.dart';
 import '../../../../generated/app_assets.dart';
-import '../../widget/saleproduct.dart';
 import '../../../../models/product.dart';
+import '../../widget/saleproduct.dart';
 import '../product_details.dart';
-
-Widget buildNewProduct(Product product) {
-  return Container(
-    margin: const EdgeInsets.only(right: 12.0),
-    width: 140,
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        ClipRRect(
-          borderRadius: BorderRadius.circular(12),
-          child: Image.network(
-            product.imgUrl,
-            width: 140,
-            height: 140,
-            fit: BoxFit.cover,
-          ),
-        ),
-        const SizedBox(height: 8),
-        Text(
-          product.title,
-          style: AppTextStyles.font14BlackWeight500,
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-        ),
-        Text(
-          '\$${product.price}',
-          style: AppTextStyles.font11GrayWeight400,
-        ),
-      ],
-    ),
-  );
-}
 
 class HomePage extends StatelessWidget {
   @override
@@ -176,4 +144,36 @@ class HomePage extends StatelessWidget {
       },
     );
   }
+  Widget buildNewProduct(Product product) {
+    return Container(
+      margin: const EdgeInsets.only(right: 12.0),
+      width: 140,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(12),
+            child: Image.asset(
+              product.imgUrl,
+              width: 140,
+              height: 140,
+              fit: BoxFit.cover,
+            ),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            product.title,
+            style: AppTextStyles.font14BlackWeight500,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+          ),
+          Text(
+            '\$${product.price}',
+            style: AppTextStyles.font11GrayWeight400,
+          ),
+        ],
+      ),
+    );
+  }
+
 }

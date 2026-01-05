@@ -42,6 +42,9 @@ class AppAssets {
   /// assets/images/clothe2.png
   static const String imagesClothe2 = "assets/images/clothe2.png";
 
+  static const mastercardIcon =
+      'https://upload.wikimedia.org/wikipedia/commons/0/04/Mastercard-logo.png';
+
 
 }
 

@@ -2,6 +2,8 @@ import 'package:ecommerce/core/components/widgets/main_button.dart';
 import 'package:ecommerce/core/extensions/app_extentions.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../../controllers/auth_controller.dart';
 import '../../../../../core/components/widgets/app_text_field.dart';
 import '../../../../../core/routes/routes.dart';
 import 'navigate_text_widget.dart';
@@ -49,9 +51,10 @@ class _LoginFormState extends State<LoginForm> {
     }
   }
 
-
   @override
   Widget build(BuildContext context) {
+    final authController = context.watch<AuthController>();
+
     return Form(
       key: _formKey,
       child: Column(
@@ -62,6 +65,7 @@ class _LoginFormState extends State<LoginForm> {
             hintText: "Email",
             keyboardType: TextInputType.emailAddress,
             textInputAction: TextInputAction.next,
+            onChanged: authController.updateEmail,
             validator: (value) {
               if (value == null || value.isEmpty) return null;
               if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value)) return "invalid";
@@ -74,6 +78,7 @@ class _LoginFormState extends State<LoginForm> {
             hintText: "Password",
             keyboardType: TextInputType.visiblePassword,
             textInputAction: TextInputAction.done,
+            onChanged: authController.updatePassword,
             obscureText: true,
             validator: (value) {
               if (value == null || value.isEmpty) return "Password مطلوب";

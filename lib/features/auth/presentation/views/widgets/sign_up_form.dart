@@ -1,6 +1,8 @@
 import 'package:ecommerce/core/extensions/app_extentions.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../../controllers/auth_controller.dart';
 import '../../../../../core/components/widgets/app_text_field.dart';
 import '../../../../../core/components/widgets/main_button.dart';
 import '../../../../../core/routes/routes.dart';
@@ -64,6 +66,8 @@ class _SignUpFormState extends State<SignUpForm> {
 
   @override
   Widget build(BuildContext context) {
+    final authController = context.watch<AuthController>();
+
     return Form(
       key: _formKey,
       autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -75,6 +79,7 @@ class _SignUpFormState extends State<SignUpForm> {
             hintText: "Name",
             keyboardType: TextInputType.name,
             textInputAction: TextInputAction.next,
+            //onChanged: authController.updateName,
             validator: (value) {
               if (value == null || value.isEmpty) return "Name مطلوب";
               if (value.length < 3) return "الاسم قصير جدًا";
@@ -87,6 +92,7 @@ class _SignUpFormState extends State<SignUpForm> {
             hintText: "Email",
             keyboardType: TextInputType.emailAddress,
             textInputAction: TextInputAction.next,
+            onChanged: authController.updateEmail,
             validator: (value) {
               if (value == null || value.isEmpty) return "Email مطلوب";
               if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value)) return "Email غير صالح";
@@ -99,6 +105,7 @@ class _SignUpFormState extends State<SignUpForm> {
             hintText: "Password",
             keyboardType: TextInputType.visiblePassword,
             textInputAction: TextInputAction.done,
+            onChanged: authController.updatePassword,
             obscureText: true,
             validator: (value) {
               if (value == null || value.isEmpty) return "Password مطلوب";

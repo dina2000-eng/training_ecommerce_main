@@ -11,6 +11,7 @@ class AppTextField extends StatefulWidget {
     this.textInputAction,
     this.validator,
     this.obscureText = false,
+    this.onChanged,
   });
 
   final String hintText;
@@ -19,6 +20,7 @@ class AppTextField extends StatefulWidget {
   final TextInputAction? textInputAction;
   final String? Function(String?)? validator;
   final bool obscureText;
+  final void Function(String)? onChanged;
 
   @override
   State<AppTextField> createState() => _AppTextFieldState();

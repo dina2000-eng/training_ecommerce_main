@@ -9,11 +9,13 @@ class MainButton extends StatelessWidget {
     this.onTap,
     this.title,
     this.child,
+    this.hasCircularBorder,
   });
 
   final void Function()? onTap;
   final String? title;
   final Widget? child;
+  final Widget? hasCircularBorder ;
 
   @override
   Widget build(BuildContext context) {

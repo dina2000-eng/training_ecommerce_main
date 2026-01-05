@@ -1,0 +1,100 @@
+import 'package:ecommerce/core/extensions/app_extentions.dart';
+import 'package:ecommerce/core/theme/app_colors.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../controllers/checkout/checkout_cubit.dart';
+import '../../../core/routes/routes.dart';
+import '../../../core/theme/app_text_styles.dart';
+import '../../../models/add_shipping_address_args.dart';
+import '../../../models/shipping_address.dart';
+
+class ShippingAddressStateItem extends StatefulWidget {
+  final ShippingAddress shippingAddress;
+  const ShippingAddressStateItem({
+    super.key,
+    required this.shippingAddress,
+  });
+
+  @override
+  State<ShippingAddressStateItem> createState() =>
+      _ShippingAddressStateItemState();
+}
+
+class _ShippingAddressStateItemState extends State<ShippingAddressStateItem> {
+  late bool checkedValue;
+
+  @override
+  void initState() {
+    super.initState();
+    checkedValue = widget.shippingAddress.isDefault;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final checkoutCubit = BlocProvider.of<CheckoutCubit>(context);
+
+    return Card(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  widget.shippingAddress.fullName,
+                  style: AppTextStyles.font16BlackWeight400.copyWith(
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                InkWell(
+                  onTap: () => Navigator.of(context).pushNamed(
+                    Routes.addShippingAddressRoute,
+                    arguments: AddShippingAddressArgs(
+                        shippingAddress: widget.shippingAddress,
+                        checkoutCubit: checkoutCubit
+                    ),
+                  ),
+                  child: Text(
+                    'Edit',
+                    style: AppTextStyles.font14BlackWeight500.copyWith(
+                      color: AppColors.redColor,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            8.verticalSizedBox,
+            Text(
+              widget.shippingAddress.address,
+              style: AppTextStyles.font16BlackWeight400,
+            ),
+            Text(
+              '${widget.shippingAddress.city}, ${widget.shippingAddress.state}, ${widget.shippingAddress.country}',
+              style: AppTextStyles.font16BlackWeight400,
+            ),
+            CheckboxListTile(
+              title: const Text("Default shipping address"),
+              value: checkedValue,
+              onChanged: (newValue) async {
+                setState(() {
+                  checkedValue = newValue!;
+                });
+                // TODO: We need to add the business logic of adding the default address (one default)
+                final newAddress =
+                widget.shippingAddress.copyWith(isDefault: newValue);
+                await checkoutCubit.saveAddress(newAddress);
+              },
+              activeColor: Colors.black,
+              contentPadding: EdgeInsets.zero,
+              controlAffinity:
+              ListTileControlAffinity.leading, //  <-- leading Checkbox
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
